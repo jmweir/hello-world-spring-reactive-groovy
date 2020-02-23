@@ -1,0 +1,4 @@
+spring:
+  application.name: hello-world
+app:
+  name: Victor
