@@ -99,3 +99,26 @@ Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
 ```
 Test the application by browsing to http://localhost:8080
+
+### Create Kubernetes NGINX Ingress
+1. Install NGINX Ingress Controller (see: https://kubernetes.github.io/ingress-nginx/deploy/):
+```bash
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.29.0/deploy/static/mandatory.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.29.0/deploy/static/provider/cloud-generic.yaml
+```
+2. Create the file .kube/ingress.yaml:
+```bash
+$ cat .kube/ingress.yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: hello-world
+spec:
+  backend:
+    serviceName: hello-world
+    servicePort: 8080
+```
+3. Apply ingress:
+```bash
+$ kubectl apply -f .kube/ingress.yaml
+```
