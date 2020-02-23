@@ -91,3 +91,11 @@ status:
 $ kubectl apply -f .kube/service.yaml
 service/hello-world created
 ```
+
+### Forward Service Port and Test
+```bash
+$ kubectl port-forward svc/hello-world 8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+```
+Test the application by browsing to http://localhost:8080
