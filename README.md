@@ -28,6 +28,7 @@ KubeDNS is running at https://kubernetes.docker.internal:6443/api/v1/namespaces/
 ### Create Kubernetes Deployment
 1. Generate YAML:
 ```bash
+$ mkdir .kube
 $ kubectl create deployment hello-world --image=com.example/hello-world:1.0.0 --dry-run -o yaml >.kube/deployment.yaml
 $ cat .kube/deployment.yaml
 apiVersion: apps/v1
