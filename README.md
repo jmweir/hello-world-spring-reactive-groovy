@@ -60,3 +60,33 @@ status: {}
 $ kubectl apply -f .kube/deployment.yaml
 deployment.apps/hello-world created
 ```
+
+### Create Kubernetes Service
+1. Generate YAML:
+```bash
+$ kubectl create service clusterip hello-world --tcp=8080:8080 --dry-run -o yaml >.kube/service.yaml
+$ cat .kube/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: hello-world
+  name: hello-world
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: hello-world
+  type: ClusterIP
+status:
+  loadBalancer: {}
+```
+2. Apply service:
+```bash
+$ kubectl apply -f .kube/service.yaml
+service/hello-world created
+```
