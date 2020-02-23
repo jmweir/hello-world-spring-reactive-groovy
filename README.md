@@ -121,4 +121,5 @@ spec:
 3. Apply ingress:
 ```bash
 $ kubectl apply -f .kube/ingress.yaml
+ingress.networking.k8s.io/hello-world created
 ```
