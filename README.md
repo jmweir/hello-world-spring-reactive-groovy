@@ -16,5 +16,11 @@ DOCKER_BUILDKIT=1 docker build -t com.example/hello-world:1.0.0 .
 
 ### Install Kubernetes
 1. Install Docker for Desktop from here: https://www.docker.com/products/docker-desktop
-2. Activate Kubernetes in Docker preferences:
+2. Activate Kubernetes in Docker preferences (takes 5-10 minutes the first time):
 ![Enable Kubernetes](images/EnableKubernetes.png)
+3. Confirm Kubernetes installation:
+```bash
+kubectl cluster-info
+Kubernetes master is running at https://kubernetes.docker.internal:6443
+KubeDNS is running at https://kubernetes.docker.internal:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+```
