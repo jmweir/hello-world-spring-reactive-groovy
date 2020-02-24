@@ -106,6 +106,14 @@ $ kubectl apply -f .kube/service.yaml
 service/hello-world created
 ```
 
+### Forward Service Port and Test
+```bash
+$ kubectl port-forward svc/hello-world 8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+```
+Test the application by browsing to http://localhost:8080
+
 ### Create Kubernetes NGINX Ingress
 1. Install NGINX Ingress Controller (see: https://kubernetes.github.io/ingress-nginx/deploy/):
 ```bash
