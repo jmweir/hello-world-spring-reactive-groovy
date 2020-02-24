@@ -123,6 +123,28 @@ Test the application by browsing to http://localhost:8080
 3. Redeploy with: `kubectl apply -f .kube/deployment.yaml`
 4. Reload http://localhost:8080 a few times and confirm round-robin load balancing.
 
+### Externalize configuration in a ConfigMap
+1. Generate a ConfigMap:
+```bash
+$ kubectl create configmap hello-world --from-literal=app.name=Jim --dry-run -o yaml >.kube/config.yaml
+$ cat .kube/config.yaml
+apiVersion: v1
+data:
+  app.name: Jim
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: hello-world
+```
+2. Apply the ConfigMap:
+```bash
+$ kubectl apply -f .kube/config.yaml
+configmap/hello-world configured
+```
+3. Add `org.springframework.cloud:spring-cloud-starter-kubernetes-config:1.1.1.RELEASE' as a Gradle dependency
+4. Remove `app.name` reference from `application.yaml`
+5. Build a new Docker image and update the deployment
+
 ### Create Kubernetes NGINX Ingress
 1. Install NGINX Ingress Controller (see: https://kubernetes.github.io/ingress-nginx/deploy/):
 ```bash
