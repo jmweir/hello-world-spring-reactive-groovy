@@ -176,19 +176,19 @@ $ helm create .kube/hello-world
 Creating .kube/hello-world
 ```
 2. Replace the contents of `templates` with the YAML files in `.kube`
-3. Add NGINX as a chart dependency by adding the following to Chart.yaml:
+3. Delete `values.yaml` because we will supply values at install time.
+4. Externalize our name parameter. In `config.yaml` change `Victor` to `{{ .Values.Name }}`
+5. Add NGINX as a chart dependency by adding the following to Chart.yaml:
 ```bash
 dependencies:
   - name: nginx-ingress
     version: 1.31.0
     repository: https://kubernetes-charts.storage.googleapis.com/
 ```
-4. Install NGINX chart with:
+6. Install NGINX chart with:
 ```bash
 $ cd .kube/hello-world && helm dependency update
 ```
-5. Delete `values.yaml` because we will supply values at install time.
-6. Externalize our name parameter. In `config.yaml` change `Victor` to `{{ .Values.Name }}`
 7. Delete all resources that we've previously installed:
 ```bash
 $ kubectl delete ingress/hello-world configmap/hello-world svc/hello-world deploy/hello-world
