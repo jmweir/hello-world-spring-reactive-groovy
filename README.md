@@ -71,10 +71,8 @@ Forwarding from [::1]:8080 -> 8080
 Test the application by browsing to http://localhost:8080
 
 ### Scale the Deployment
-```bash
-$ kubectl scale deployment/hello-world --replicas=2
-deployment.extensions/hello-world scaled
-```
+1. Update replicas from 1 to 2 in `.kube/deployment.yaml`
+2. Redeploy with: `kubectl apply -f .kube/deployment.yaml`
 
 ### Create Kubernetes Load Balancing Service
 1. Generate YAML:
@@ -113,6 +111,16 @@ Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
 ```
 Test the application by browsing to http://localhost:8080
+
+### Visualize POD Identification
+1. Add `app.host: ${HOSTNAME}` to application.yaml
+2. Add `String host` to Application.Config
+3. Add `${host}` somewhere in the template
+
+### Deploy a New Image
+1. Build a new Docker image: `DOCKER_BUILDKIT=1 docker build -t com.example/hello-world:1.0.1 .`
+2. Update 1.0.0 to 1.0.1 in `.kube/deployment.yaml`
+3. Redeploy with: `kubectl apply -f .kube/deployment.yaml`
 
 ### Create Kubernetes NGINX Ingress
 1. Install NGINX Ingress Controller (see: https://kubernetes.github.io/ingress-nginx/deploy/):
