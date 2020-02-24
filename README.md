@@ -146,7 +146,7 @@ configmap/hello-world configured
 5. Build a new Docker image and update the deployment
 
 ### Create Kubernetes NGINX Ingress
-1. Install NGINX Ingress Controller (see: https://kubernetes.github.io/ingress-nginx/deploy/):
+1. Install NGINX Ingress Controller (see: https://kubernetes.github.io/ingress-nginx/deploy):
 ```bash
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.29.0/deploy/static/mandatory.yaml
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.29.0/deploy/static/provider/cloud-generic.yaml
