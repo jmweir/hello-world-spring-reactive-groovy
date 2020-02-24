@@ -62,7 +62,21 @@ $ kubectl apply -f .kube/deployment.yaml
 deployment.apps/hello-world created
 ```
 
-### Create Kubernetes Service
+### Forward Deployment Port and Test
+```bash
+$ kubectl port-forward deployment/hello-world 8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+```
+Test the application by browsing to http://localhost:8080
+
+### Scale the Deployment
+```bash
+$ kubectl scale deployment/hello-world --replicas=2
+deployment.extensions/hello-world scaled
+```
+
+### Create Kubernetes Load Balancing Service
 1. Generate YAML:
 ```bash
 $ kubectl create service clusterip hello-world --tcp=8080:8080 --dry-run -o yaml >.kube/service.yaml
@@ -91,14 +105,6 @@ status:
 $ kubectl apply -f .kube/service.yaml
 service/hello-world created
 ```
-
-### Forward Service Port and Test
-```bash
-$ kubectl port-forward svc/hello-world 8080
-Forwarding from 127.0.0.1:8080 -> 8080
-Forwarding from [::1]:8080 -> 8080
-```
-Test the application by browsing to http://localhost:8080
 
 ### Create Kubernetes NGINX Ingress
 1. Install NGINX Ingress Controller (see: https://kubernetes.github.io/ingress-nginx/deploy/):
