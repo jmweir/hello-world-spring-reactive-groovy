@@ -117,10 +117,11 @@ Test the application by browsing to http://localhost:8080
 2. Add `String host` to Application.Config
 3. Add `${host}` somewhere in the template
 
-### Deploy a New Image
+### Deploy a New Image and Confirm Balancing
 1. Build a new Docker image: `DOCKER_BUILDKIT=1 docker build -t com.example/hello-world:1.0.1 .`
 2. Update 1.0.0 to 1.0.1 in `.kube/deployment.yaml`
 3. Redeploy with: `kubectl apply -f .kube/deployment.yaml`
+4. Reload http://localhost:8080 a few times and confirm round-robin load balancing.
 
 ### Create Kubernetes NGINX Ingress
 1. Install NGINX Ingress Controller (see: https://kubernetes.github.io/ingress-nginx/deploy/):
